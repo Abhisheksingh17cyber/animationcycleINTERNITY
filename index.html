@@ -1,13 +1,322 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>animationcycle</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INTERNITY — The Evolution of Performance</title>
+  <meta name="description" content="Performance elevated. Precision-built carbon wheels trusted by cyclists who demand speed, control, and technical excellence." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+
+  <!-- ============ LOADER ============ -->
+  <div id="loader">
+    <div class="loader-content">
+      <span class="loader-brand">INTERNITY</span>
+      <div class="loader-bar-track">
+        <div class="loader-bar-fill" id="loaderFill"></div>
+      </div>
+      <span class="loader-percent" id="loaderPercent">0%</span>
+    </div>
+  </div>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav id="mainNav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">INTERNITY</a>
+      <div class="nav-links">
+        <a href="#products">Wheels</a>
+        <a href="#craft">Components</a>
+        <a href="#about-cta">About Us</a>
+        <a href="#footer">Dealer</a>
+        <a href="#footer">Service</a>
+      </div>
+      <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============ MOBILE MENU ============ -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#products">Wheels</a>
+    <a href="#craft">Components</a>
+    <a href="#about-cta">About Us</a>
+    <a href="#footer">Dealer</a>
+    <a href="#footer">Service</a>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section id="hero" class="section section--dark">
+    <div class="crosshair crosshair--tl">+</div>
+    <div class="crosshair crosshair--tr">+</div>
+    <div class="crosshair crosshair--bl">+</div>
+    <div class="crosshair crosshair--br">+</div>
+    <div class="hero-bg">
+      <img src="/images/hero-wheel.png" alt="Carbon Wheel" class="hero-bg-img" />
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title" id="heroTitle">WELCOME</h1>
+      <p class="hero-subtitle">THE EVOLUTION OF PERFORMANCE</p>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Scroll to explore</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ============ SCROLL NARRATIVE ============ -->
+  <section id="narrative" class="section section--dark">
+    <div class="narrative-wrapper">
+      <!-- Sidebar Navigation -->
+      <div class="narrative-sidebar">
+        <div class="narrative-nav">
+          <a href="#" class="narrative-nav-item active" data-index="0">
+            <span class="narrative-nav-num">01</span>
+            <span class="narrative-nav-label">PHILOSOPHY</span>
+          </a>
+          <a href="#" class="narrative-nav-item" data-index="1">
+            <span class="narrative-nav-num">02</span>
+            <span class="narrative-nav-label">CRAFT</span>
+          </a>
+          <a href="#" class="narrative-nav-item" data-index="2">
+            <span class="narrative-nav-num">03</span>
+            <span class="narrative-nav-label">INNOVATION</span>
+          </a>
+          <a href="#" class="narrative-nav-item" data-index="3">
+            <span class="narrative-nav-num">04</span>
+            <span class="narrative-nav-label">EVOLUTION</span>
+          </a>
+        </div>
+      </div>
+      <!-- Panels -->
+      <div class="narrative-panels">
+        <!-- Panel 1: Philosophy -->
+        <div class="narrative-panel" data-index="0">
+          <div class="narrative-panel-label">PHILOSOPHY</div>
+          <h2 class="narrative-panel-title">THE EVOLUTION<br/>OF PERFORMANCE</h2>
+          <p class="narrative-panel-text">Performance is more than speed. It's control in every turn, perfect balance, and confidence in how the wheel responds across any terrain. INTERNITY wheels carry decades of development and a singular focus on engineering.</p>
+        </div>
+        <!-- Panel 2: Craft -->
+        <div class="narrative-panel" data-index="1">
+          <div class="narrative-panel-label">CRAFT</div>
+          <h2 class="narrative-panel-title">HANDMADE<br/>WITH PRECISION</h2>
+          <p class="narrative-panel-text">Our wheels are made from custom composite carbon using aerospace engineering and cycling expertise. Each is built using our Rim-to-Rim monocoque design, engineered for low weight, maximum stiffness, and a ride that's completely in tune with you.</p>
+        </div>
+        <!-- Panel 3: Innovation -->
+        <div class="narrative-panel" data-index="2">
+          <div class="narrative-panel-label">INNOVATION</div>
+          <h2 class="narrative-panel-title">ALPHA RIB<br/>TECHNOLOGY</h2>
+          <p class="narrative-panel-text">ART is INTERNITY's latest innovation, engineered to strengthen the rim from the inside out. The internal rib structure boosts lateral stiffness without adding weight, so more of your power goes straight to the road.</p>
+        </div>
+        <!-- Panel 4: Evolution -->
+        <div class="narrative-panel" data-index="3">
+          <div class="narrative-panel-label">EVOLUTION</div>
+          <h2 class="narrative-panel-title">MEILENSTEIN<br/>ART</h2>
+          <p class="narrative-panel-text">The all-new MEILENSTEIN ART is a completely re-engineered all-round road wheel built for greater aerodynamics, stiffness, and control. First to feature Alpha Rib Technology, it's made to handle climbs, descents, and flat terrain with equal precision.</p>
+          <a href="#products" class="btn btn--outline">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCT IMAGE SECTION ============ -->
+  <section id="craft" class="section section--light">
+    <div class="crosshair crosshair--tl dark">+</div>
+    <div class="crosshair crosshair--tr dark">+</div>
+    <div class="crosshair crosshair--bl dark">+</div>
+    <div class="crosshair crosshair--br dark">+</div>
+    <div class="craft-grid">
+      <div class="craft-info">
+        <span class="craft-label">02 CRAFT</span>
+        <h2 class="craft-title">HANDMADE IN<br/>GERMANY</h2>
+        <p class="craft-text">Made from custom composite carbon, our wheels use aerospace engineering and a Rim-to-Rim monocoque design for low weight, high stiffness, and a ride that feels fully in tune with you.</p>
+      </div>
+      <div class="craft-image">
+        <img src="/images/craftsmanship.png" alt="Craftsmanship" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <section id="marquee" class="section--marquee">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>THE EVOLUTION OF PERFORMANCE</span>
+        <span class="marquee-dot">•</span>
+        <span>PRECISION ENGINEERED</span>
+        <span class="marquee-dot">•</span>
+        <span>HANDMADE IN GERMANY</span>
+        <span class="marquee-dot">•</span>
+        <span>ALPHA RIB TECHNOLOGY</span>
+        <span class="marquee-dot">•</span>
+        <span>MEILENSTEIN ART</span>
+        <span class="marquee-dot">•</span>
+      </div>
+      <div class="marquee-content" aria-hidden="true">
+        <span>THE EVOLUTION OF PERFORMANCE</span>
+        <span class="marquee-dot">•</span>
+        <span>PRECISION ENGINEERED</span>
+        <span class="marquee-dot">•</span>
+        <span>HANDMADE IN GERMANY</span>
+        <span class="marquee-dot">•</span>
+        <span>ALPHA RIB TECHNOLOGY</span>
+        <span class="marquee-dot">•</span>
+        <span>MEILENSTEIN ART</span>
+        <span class="marquee-dot">•</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCTS GRID ============ -->
+  <section id="products" class="section section--dark">
+    <div class="crosshair crosshair--tl">+</div>
+    <div class="crosshair crosshair--tr">+</div>
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-label">WHEELS</span>
+        <h2 class="section-title">OUR COLLECTION</h2>
+      </div>
+      <div class="products-grid">
+        <div class="product-card" data-reveal>
+          <div class="product-card-img">
+            <img src="/images/hero-wheel.png" alt="MEILENSTEIN ART" />
+          </div>
+          <div class="product-card-info">
+            <h3>MEILENSTEIN ART</h3>
+            <p>All-round road</p>
+          </div>
+        </div>
+        <div class="product-card" data-reveal>
+          <div class="product-card-img">
+            <img src="/images/wheel.png" alt="OBERMAYER EVO" />
+          </div>
+          <div class="product-card-info">
+            <h3>OBERMAYER EVO</h3>
+            <p>Climbing specialist</p>
+          </div>
+        </div>
+        <div class="product-card" data-reveal>
+          <div class="product-card-img">
+            <img src="/images/hero-wheel.png" alt="FERNWEG EVO PRO" />
+          </div>
+          <div class="product-card-info">
+            <h3>FERNWEG EVO PRO</h3>
+            <p>Aero performance</p>
+          </div>
+        </div>
+        <div class="product-card" data-reveal>
+          <div class="product-card-img">
+            <img src="/images/wheel.png" alt="PFADFINDER EVO" />
+          </div>
+          <div class="product-card-info">
+            <h3>PFADFINDER EVO</h3>
+            <p>Gravel & adventure</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOCIAL FEED ============ -->
+  <section id="social" class="section section--dark">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">#rideINTERNITY</h2>
+      </div>
+      <div class="social-grid">
+        <a href="#" class="social-card" data-reveal>
+          <img src="/images/cycling1.png" alt="Cycling action" />
+          <div class="social-overlay">
+            <p>Performance elevated. Every ride is a statement.</p>
+          </div>
+        </a>
+        <a href="#" class="social-card" data-reveal>
+          <img src="/images/wheel.png" alt="Carbon wheel detail" />
+          <div class="social-overlay">
+            <p>Precision-built for those who demand excellence.</p>
+          </div>
+        </a>
+        <a href="#" class="social-card" data-reveal>
+          <img src="/images/cycling2.png" alt="Mountain pass ride" />
+          <div class="social-overlay">
+            <p>The more you ride, the stronger you get, and the further you can go.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA / ABOUT ============ -->
+  <section id="about-cta" class="section section--dark">
+    <div class="crosshair crosshair--tl">+</div>
+    <div class="crosshair crosshair--tr">+</div>
+    <div class="crosshair crosshair--bl">+</div>
+    <div class="crosshair crosshair--br">+</div>
+    <div class="cta-content">
+      <h2 class="cta-title" data-reveal>At INTERNITY, we craft more than wheels.<br/>We shape icons of performance.</h2>
+      <a href="#" class="btn btn--outline" data-reveal>About Us</a>
+    </div>
+  </section>
+
+  <!-- ============ NEWSLETTER ============ -->
+  <section id="newsletter" class="section section--dark newsletter-section">
+    <div class="section-container">
+      <h2 class="newsletter-title" data-reveal>Subscribe to our newsletter</h2>
+      <p class="newsletter-subtitle" data-reveal>Stay informed with the latest from INTERNITY.</p>
+      <form class="newsletter-form" data-reveal>
+        <input type="email" placeholder="Your email*" required />
+        <button type="submit" class="btn btn--filled">Subscribe</button>
+      </form>
+      <p class="newsletter-privacy" data-reveal>
+        I agree to the collection and processing of my personal data as described in the <a href="#">Privacy Policy</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <span class="footer-logo">INTERNITY</span>
+        <p class="footer-tagline">Performance elevated.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Wheels</h4>
+        <a href="#">MEILENSTEIN ART</a>
+        <a href="#">OBERMAYER EVO</a>
+        <a href="#">FERNWEG EVO PRO</a>
+        <a href="#">PFADFINDER EVO</a>
+      </div>
+      <div class="footer-col">
+        <h4>About Us</h4>
+        <a href="#">About Us</a>
+        <a href="#">Technology</a>
+        <a href="#">Athletes</a>
+        <a href="#">Partners</a>
+      </div>
+      <div class="footer-col">
+        <h4>Additional</h4>
+        <a href="#">Dealers</a>
+        <a href="#">Service</a>
+        <a href="#">Jobs</a>
+      </div>
+      <div class="footer-col">
+        <h4>Documents</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Imprint</a>
+        <a href="#">Cookie settings</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 INTERNITY. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>
