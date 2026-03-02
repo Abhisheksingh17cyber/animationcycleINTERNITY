@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>INTERNITY — The Evolution of Performance</title>
-  <meta name="description" content="Performance elevated. Precision-built carbon wheels trusted by cyclists who demand speed, control, and technical excellence." />
+  <meta name="description"
+    content="Performance elevated. Precision-built carbon wheels trusted by cyclists who demand speed, control, and technical excellence." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="/src/style.css" />
 </head>
+
 <body>
 
   <!-- ============ LOADER ============ -->
@@ -29,7 +33,7 @@
       <a href="#" class="nav-logo">INTERNITY</a>
       <div class="nav-links">
         <a href="#products">Wheels</a>
-        <a href="#craft">Components</a>
+        <a href="#marquee">HPC Cockpit</a>
         <a href="#about-cta">About Us</a>
         <a href="#footer">Dealer</a>
         <a href="#footer">Service</a>
@@ -43,100 +47,109 @@
   <!-- ============ MOBILE MENU ============ -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="#products">Wheels</a>
-    <a href="#craft">Components</a>
+    <a href="#marquee">HPC Cockpit</a>
     <a href="#about-cta">About Us</a>
     <a href="#footer">Dealer</a>
     <a href="#footer">Service</a>
   </div>
 
-  <!-- ============ HERO ============ -->
-  <section id="hero" class="section section--dark">
-    <div class="crosshair crosshair--tl">+</div>
-    <div class="crosshair crosshair--tr">+</div>
-    <div class="crosshair crosshair--bl">+</div>
-    <div class="crosshair crosshair--br">+</div>
-    <div class="hero-bg">
-      <img src="/images/hero-wheel.png" alt="Carbon Wheel" class="hero-bg-img" />
-    </div>
-    <div class="hero-content">
-      <h1 class="hero-title" id="heroTitle">WELCOME</h1>
-      <p class="hero-subtitle">THE EVOLUTION OF PERFORMANCE</p>
-    </div>
-    <div class="hero-scroll-indicator">
-      <span>Scroll to explore</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
+  <!-- ============ SCROLL-JACKING SHOWCASE (Hero + Narrative Combined) ============ -->
+  <section id="showcase">
+    <!-- Background that transitions from black to light -->
+    <div class="showcase-bg" id="showcaseBg"></div>
 
-  <!-- ============ SCROLL NARRATIVE ============ -->
-  <section id="narrative" class="section section--dark">
-    <div class="narrative-wrapper">
-      <!-- Sidebar Navigation -->
-      <div class="narrative-sidebar">
-        <div class="narrative-nav">
-          <a href="#" class="narrative-nav-item active" data-index="0">
-            <span class="narrative-nav-num">01</span>
-            <span class="narrative-nav-label">PHILOSOPHY</span>
-          </a>
-          <a href="#" class="narrative-nav-item" data-index="1">
-            <span class="narrative-nav-num">02</span>
-            <span class="narrative-nav-label">CRAFT</span>
-          </a>
-          <a href="#" class="narrative-nav-item" data-index="2">
-            <span class="narrative-nav-num">03</span>
-            <span class="narrative-nav-label">INNOVATION</span>
-          </a>
-          <a href="#" class="narrative-nav-item" data-index="3">
-            <span class="narrative-nav-num">04</span>
-            <span class="narrative-nav-label">EVOLUTION</span>
-          </a>
-        </div>
+    <!-- Crosshairs -->
+    <div class="crosshair crosshair--tl" id="chTL">+</div>
+    <div class="crosshair crosshair--tr" id="chTR">+</div>
+    <div class="crosshair crosshair--bl" id="chBL">+</div>
+    <div class="crosshair crosshair--br" id="chBR">+</div>
+
+    <!-- Persistent Wheel Image -->
+    <div class="showcase-wheel" id="showcaseWheel">
+      <img src="/images/hero-wheel.png" alt="Carbon Wheel" />
+      <!-- Crosshairs around the wheel -->
+      <div class="wheel-crosshair wheel-crosshair--t">+</div>
+      <div class="wheel-crosshair wheel-crosshair--r">+</div>
+      <div class="wheel-crosshair wheel-crosshair--b">+</div>
+      <div class="wheel-crosshair wheel-crosshair--l">+</div>
+      <!-- Decorative ring -->
+      <div class="wheel-ring"></div>
+    </div>
+
+    <!-- Left Sidebar Nav -->
+    <div class="showcase-sidebar" id="showcaseSidebar">
+      <div class="sidebar-item active" data-panel="0">
+        <span class="sidebar-num">01</span>
+        <span class="sidebar-label">PHILOSOPHY</span>
       </div>
-      <!-- Panels -->
-      <div class="narrative-panels">
-        <!-- Panel 1: Philosophy -->
-        <div class="narrative-panel" data-index="0">
-          <div class="narrative-panel-label">PHILOSOPHY</div>
-          <h2 class="narrative-panel-title">THE EVOLUTION<br/>OF PERFORMANCE</h2>
-          <p class="narrative-panel-text">Performance is more than speed. It's control in every turn, perfect balance, and confidence in how the wheel responds across any terrain. INTERNITY wheels carry decades of development and a singular focus on engineering.</p>
-        </div>
-        <!-- Panel 2: Craft -->
-        <div class="narrative-panel" data-index="1">
-          <div class="narrative-panel-label">CRAFT</div>
-          <h2 class="narrative-panel-title">HANDMADE<br/>WITH PRECISION</h2>
-          <p class="narrative-panel-text">Our wheels are made from custom composite carbon using aerospace engineering and cycling expertise. Each is built using our Rim-to-Rim monocoque design, engineered for low weight, maximum stiffness, and a ride that's completely in tune with you.</p>
-        </div>
-        <!-- Panel 3: Innovation -->
-        <div class="narrative-panel" data-index="2">
-          <div class="narrative-panel-label">INNOVATION</div>
-          <h2 class="narrative-panel-title">ALPHA RIB<br/>TECHNOLOGY</h2>
-          <p class="narrative-panel-text">ART is INTERNITY's latest innovation, engineered to strengthen the rim from the inside out. The internal rib structure boosts lateral stiffness without adding weight, so more of your power goes straight to the road.</p>
-        </div>
-        <!-- Panel 4: Evolution -->
-        <div class="narrative-panel" data-index="3">
-          <div class="narrative-panel-label">EVOLUTION</div>
-          <h2 class="narrative-panel-title">MEILENSTEIN<br/>ART</h2>
-          <p class="narrative-panel-text">The all-new MEILENSTEIN ART is a completely re-engineered all-round road wheel built for greater aerodynamics, stiffness, and control. First to feature Alpha Rib Technology, it's made to handle climbs, descents, and flat terrain with equal precision.</p>
-          <a href="#products" class="btn btn--outline">Learn more</a>
-        </div>
+      <div class="sidebar-progress">
+        <div class="sidebar-progress-fill" id="sidebarProgress"></div>
+      </div>
+      <div class="sidebar-item" data-panel="1">
+        <span class="sidebar-num">02</span>
+        <span class="sidebar-label">CRAFT</span>
+      </div>
+      <div class="sidebar-item" data-panel="2">
+        <span class="sidebar-num">03</span>
+        <span class="sidebar-label">INNOVATION</span>
+      </div>
+      <div class="sidebar-item" data-panel="3">
+        <span class="sidebar-num">04</span>
+        <span class="sidebar-label">EVOLUTION</span>
       </div>
     </div>
-  </section>
 
-  <!-- ============ PRODUCT IMAGE SECTION ============ -->
-  <section id="craft" class="section section--light">
-    <div class="crosshair crosshair--tl dark">+</div>
-    <div class="crosshair crosshair--tr dark">+</div>
-    <div class="crosshair crosshair--bl dark">+</div>
-    <div class="crosshair crosshair--br dark">+</div>
-    <div class="craft-grid">
-      <div class="craft-info">
-        <span class="craft-label">02 CRAFT</span>
-        <h2 class="craft-title">HANDMADE IN<br/>GERMANY</h2>
-        <p class="craft-text">Made from custom composite carbon, our wheels use aerospace engineering and a Rim-to-Rim monocoque design for low weight, high stiffness, and a ride that feels fully in tune with you.</p>
+    <!-- Panel 0: Welcome / Hero (centered, dark bg) -->
+    <div class="showcase-panel" id="panel0" data-panel="0">
+      <div class="panel-center">
+        <span class="panel-overline">WELCOME</span>
+        <h1 class="panel-hero-title">THE EVOLUTION OF<br />PERFORMANCE</h1>
+        <a href="#products" class="btn btn--outline">LEARN MORE</a>
       </div>
-      <div class="craft-image">
-        <img src="/images/craftsmanship.png" alt="Craftsmanship" />
+    </div>
+
+    <!-- Panel 1: Philosophy (right side, light bg transition) -->
+    <div class="showcase-panel" id="panel1" data-panel="1">
+      <div class="panel-right">
+        <span class="panel-overline">PHILOSOPHY</span>
+        <h2 class="panel-title">PERFORMANCE<br />ENGINEERED</h2>
+        <p class="panel-text">Performance is more than speed. It's control in every turn, perfect balance, and
+          confidence in how the wheel responds across any terrain. INTERNITY wheels carry decades of development and a
+          singular focus on engineering. The result is more than a technical advantage. It's a riding experience built
+          on precision and trust.</p>
+      </div>
+    </div>
+
+    <!-- Panel 2: Craft (centered on light bg) -->
+    <div class="showcase-panel" id="panel2" data-panel="2">
+      <div class="panel-center-wide">
+        <h2 class="panel-title-large">HANDMADE IN<br />GERMANY</h2>
+        <p class="panel-text-center">Our wheels are made from INTERNITY Custom Composite using aerospace engineering and
+          cycling expertise. Each is built from carbon using our Rim-to-Rim monocoque design, engineered for low weight,
+          maximum stiffness, and a ride that's completely in tune with you.</p>
+      </div>
+    </div>
+
+    <!-- Panel 3: Innovation (right side) -->
+    <div class="showcase-panel" id="panel3" data-panel="3">
+      <div class="panel-right">
+        <span class="panel-overline">INNOVATION</span>
+        <h2 class="panel-title">ALPHA RIB<br />TECHNOLOGY</h2>
+        <p class="panel-text">ART is INTERNITY's latest innovation, engineered to strengthen the rim from the inside
+          out. The internal rib structure boosts lateral stiffness without adding weight, so more of your power goes
+          straight to the road.</p>
+      </div>
+    </div>
+
+    <!-- Panel 4: Evolution / Product -->
+    <div class="showcase-panel" id="panel4" data-panel="4">
+      <div class="panel-right">
+        <span class="panel-overline">EVOLUTION</span>
+        <h2 class="panel-title">MEILENSTEIN<br />ART</h2>
+        <p class="panel-text">The all-new MEILENSTEIN ART is a completely re-engineered all-round road wheel built for
+          greater aerodynamics, stiffness, and control. First to feature Alpha Rib Technology, it's made to handle
+          climbs, descents, and flat terrain with equal precision.</p>
+        <a href="#products" class="btn btn--outline btn--dark">Learn more</a>
       </div>
     </div>
   </section>
@@ -257,7 +270,8 @@
     <div class="crosshair crosshair--bl">+</div>
     <div class="crosshair crosshair--br">+</div>
     <div class="cta-content">
-      <h2 class="cta-title" data-reveal>At INTERNITY, we craft more than wheels.<br/>We shape icons of performance.</h2>
+      <h2 class="cta-title" data-reveal>At INTERNITY, we craft more than wheels.<br />We shape icons of performance.
+      </h2>
       <a href="#" class="btn btn--outline" data-reveal>About Us</a>
     </div>
   </section>
@@ -319,4 +333,5 @@
 
   <script type="module" src="/src/main.js"></script>
 </body>
+
 </html>
