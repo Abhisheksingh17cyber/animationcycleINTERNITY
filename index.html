@@ -30,14 +30,21 @@
   <!-- ============ NAVIGATION ============ -->
   <nav id="mainNav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">INTERNITY</a>
+      <a href="#" class="nav-logo"><em>Internity</em></a>
       <div class="nav-links">
         <a href="#products">Wheels</a>
-        <a href="#marquee">HPC Cockpit</a>
+        <a href="#about-cta">HPC Cockpit</a>
         <a href="#about-cta">About Us</a>
         <a href="#footer">Dealer</a>
         <a href="#footer">Service</a>
       </div>
+      <button class="nav-search-btn" aria-label="Search">
+        <span>Search</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+      </button>
       <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
         <span></span><span></span>
       </button>
@@ -47,185 +54,162 @@
   <!-- ============ MOBILE MENU ============ -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="#products">Wheels</a>
-    <a href="#marquee">HPC Cockpit</a>
     <a href="#about-cta">About Us</a>
     <a href="#footer">Dealer</a>
     <a href="#footer">Service</a>
   </div>
 
-  <!-- ============ SCROLL-JACKING SHOWCASE (Hero + Narrative Combined) ============ -->
-  <section id="showcase">
-    <!-- Background that transitions from black to light -->
-    <div class="showcase-bg" id="showcaseBg"></div>
+  <!-- ============ PINNED SHOWCASE ============ -->
+  <!-- This is the key section: a single 100vh container that gets PINNED by GSAP.
+       A GSAP timeline scrubbed to scroll progress transitions between slides. -->
+  <section id="showcase" class="showcase">
+    <!-- Background overlay for color transition -->
+    <div class="showcase__bg showcase__bg--dark" id="bgDark"></div>
+    <div class="showcase__bg showcase__bg--light" id="bgLight"></div>
 
-    <!-- Crosshairs -->
-    <div class="crosshair crosshair--tl" id="chTL">+</div>
-    <div class="crosshair crosshair--tr" id="chTR">+</div>
-    <div class="crosshair crosshair--bl" id="chBL">+</div>
-    <div class="crosshair crosshair--br" id="chBR">+</div>
+    <!-- Crosshair markers -->
+    <div class="cross cross--tl">+</div>
+    <div class="cross cross--tr">+</div>
+    <div class="cross cross--bl">+</div>
+    <div class="cross cross--br">+</div>
 
-    <!-- Persistent Wheel Image -->
-    <div class="showcase-wheel" id="showcaseWheel">
+    <!-- Sidebar nav -->
+    <div class="showcase__sidebar">
+      <div class="sidebar__item sidebar__item--active" data-slide="0">
+        <span class="sidebar__num">01</span>
+        <span class="sidebar__label">PHILOSOPHY</span>
+      </div>
+      <div class="sidebar__line">
+        <div class="sidebar__line-fill"></div>
+      </div>
+      <div class="sidebar__item" data-slide="1">
+        <span class="sidebar__num">02</span>
+        <span class="sidebar__label">CRAFT</span>
+      </div>
+      <div class="sidebar__item" data-slide="2">
+        <span class="sidebar__num">03</span>
+        <span class="sidebar__label">INNOVATION</span>
+      </div>
+      <div class="sidebar__item" data-slide="3">
+        <span class="sidebar__num">04</span>
+        <span class="sidebar__label">EVOLUTION</span>
+      </div>
+    </div>
+
+    <!-- THE WHEEL — an absolutely positioned image inside the pinned container -->
+    <div class="showcase__wheel" id="wheel">
       <img src="/images/hero-wheel.png" alt="Carbon Wheel" />
-      <!-- Crosshairs around the wheel -->
-      <div class="wheel-crosshair wheel-crosshair--t">+</div>
-      <div class="wheel-crosshair wheel-crosshair--r">+</div>
-      <div class="wheel-crosshair wheel-crosshair--b">+</div>
-      <div class="wheel-crosshair wheel-crosshair--l">+</div>
-      <!-- Decorative ring -->
-      <div class="wheel-ring"></div>
     </div>
 
-    <!-- Left Sidebar Nav -->
-    <div class="showcase-sidebar" id="showcaseSidebar">
-      <div class="sidebar-item active" data-panel="0">
-        <span class="sidebar-num">01</span>
-        <span class="sidebar-label">PHILOSOPHY</span>
-      </div>
-      <div class="sidebar-progress">
-        <div class="sidebar-progress-fill" id="sidebarProgress"></div>
-      </div>
-      <div class="sidebar-item" data-panel="1">
-        <span class="sidebar-num">02</span>
-        <span class="sidebar-label">CRAFT</span>
-      </div>
-      <div class="sidebar-item" data-panel="2">
-        <span class="sidebar-num">03</span>
-        <span class="sidebar-label">INNOVATION</span>
-      </div>
-      <div class="sidebar-item" data-panel="3">
-        <span class="sidebar-num">04</span>
-        <span class="sidebar-label">EVOLUTION</span>
-      </div>
+    <!-- Decorative circle ring behind wheel -->
+    <div class="showcase__ring" id="ring"></div>
+
+    <!-- SLIDE 0: Welcome (centered, dark bg) -->
+    <div class="slide slide--welcome" id="slide0">
+      <span class="slide__overline">WELCOME</span>
+      <h1 class="slide__hero-title">THE EVOLUTION OF<br />PERFORMANCE</h1>
+      <a href="#products" class="btn btn--outline-light">LEARN MORE</a>
     </div>
 
-    <!-- Panel 0: Welcome / Hero (centered, dark bg) -->
-    <div class="showcase-panel" id="panel0" data-panel="0">
-      <div class="panel-center">
-        <span class="panel-overline">WELCOME</span>
-        <h1 class="panel-hero-title">THE EVOLUTION OF<br />PERFORMANCE</h1>
-        <a href="#products" class="btn btn--outline">LEARN MORE</a>
-      </div>
-    </div>
-
-    <!-- Panel 1: Philosophy (right side, light bg transition) -->
-    <div class="showcase-panel" id="panel1" data-panel="1">
-      <div class="panel-right">
-        <span class="panel-overline">PHILOSOPHY</span>
-        <h2 class="panel-title">PERFORMANCE<br />ENGINEERED</h2>
-        <p class="panel-text">Performance is more than speed. It's control in every turn, perfect balance, and
-          confidence in how the wheel responds across any terrain. INTERNITY wheels carry decades of development and a
+    <!-- SLIDE 1: Philosophy (right-aligned, light bg) -->
+    <div class="slide slide--right" id="slide1">
+      <div class="slide__content">
+        <span class="slide__label">PHILOSOPHY</span>
+        <h2 class="slide__title">PERFORMANCE<br />ENGINEERED</h2>
+        <p class="slide__text">Performance is more than speed. It's control in every turn, perfect balance, and
+          confidence in how the wheel responds across any terrain. Internity wheels carry decades of development and a
           singular focus on engineering. The result is more than a technical advantage. It's a riding experience built
           on precision and trust.</p>
       </div>
     </div>
 
-    <!-- Panel 2: Craft (centered on light bg) -->
-    <div class="showcase-panel" id="panel2" data-panel="2">
-      <div class="panel-center-wide">
-        <h2 class="panel-title-large">HANDMADE IN<br />GERMANY</h2>
-        <p class="panel-text-center">Our wheels are made from INTERNITY Custom Composite using aerospace engineering and
-          cycling expertise. Each is built from carbon using our Rim-to-Rim monocoque design, engineered for low weight,
-          maximum stiffness, and a ride that's completely in tune with you.</p>
-      </div>
+    <!-- SLIDE 2: Craft (centered, light bg) -->
+    <div class="slide slide--center" id="slide2">
+      <h2 class="slide__big-title">HANDMADE IN<br />GERMANY</h2>
+      <p class="slide__center-text">Our wheels are made from Internity Custom Composite using aerospace engineering and
+        cycling expertise. Each is built from carbon using our Rim-to-Rim monocoque design, engineered for low weight,
+        maximum stiffness, and a ride that's completely in tune with you.</p>
     </div>
 
-    <!-- Panel 3: Innovation (right side) -->
-    <div class="showcase-panel" id="panel3" data-panel="3">
-      <div class="panel-right">
-        <span class="panel-overline">INNOVATION</span>
-        <h2 class="panel-title">ALPHA RIB<br />TECHNOLOGY</h2>
-        <p class="panel-text">ART is INTERNITY's latest innovation, engineered to strengthen the rim from the inside
+    <!-- SLIDE 3: Innovation (right-aligned, light bg) -->
+    <div class="slide slide--right" id="slide3">
+      <div class="slide__content">
+        <span class="slide__label">INNOVATION</span>
+        <h2 class="slide__title">ALPHA RIB<br />TECHNOLOGY</h2>
+        <p class="slide__text">ART is Internity's latest innovation, engineered to strengthen the rim from the inside
           out. The internal rib structure boosts lateral stiffness without adding weight, so more of your power goes
           straight to the road.</p>
       </div>
     </div>
 
-    <!-- Panel 4: Evolution / Product -->
-    <div class="showcase-panel" id="panel4" data-panel="4">
-      <div class="panel-right">
-        <span class="panel-overline">EVOLUTION</span>
-        <h2 class="panel-title">MEILENSTEIN<br />ART</h2>
-        <p class="panel-text">The all-new MEILENSTEIN ART is a completely re-engineered all-round road wheel built for
-          greater aerodynamics, stiffness, and control. First to feature Alpha Rib Technology, it's made to handle
-          climbs, descents, and flat terrain with equal precision.</p>
-        <a href="#products" class="btn btn--outline btn--dark">Learn more</a>
+    <!-- SLIDE 4: Evolution (right-aligned, light bg) -->
+    <div class="slide slide--right" id="slide4">
+      <div class="slide__content">
+        <span class="slide__label">EVOLUTION</span>
+        <h2 class="slide__title">MEILENSTEIN<br />ART</h2>
+        <p class="slide__text">The all-new MEILENSTEIN ART is a completely re-engineered all-round road wheel built for
+          greater aerodynamics, stiffness, and control. First to feature Alpha Rib Technology.</p>
+        <a href="#products" class="btn btn--outline-dark">Learn more</a>
       </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="showcase__scroll" id="scrollCue">
+      <span>Scroll to explore</span>
+      <div class="showcase__scroll-line"></div>
     </div>
   </section>
 
   <!-- ============ MARQUEE ============ -->
-  <section id="marquee" class="section--marquee">
-    <div class="marquee-track">
-      <div class="marquee-content">
-        <span>THE EVOLUTION OF PERFORMANCE</span>
-        <span class="marquee-dot">•</span>
-        <span>PRECISION ENGINEERED</span>
-        <span class="marquee-dot">•</span>
-        <span>HANDMADE IN GERMANY</span>
-        <span class="marquee-dot">•</span>
-        <span>ALPHA RIB TECHNOLOGY</span>
-        <span class="marquee-dot">•</span>
-        <span>MEILENSTEIN ART</span>
-        <span class="marquee-dot">•</span>
+  <section id="marquee" class="marquee">
+    <div class="marquee__track">
+      <div class="marquee__content">
+        <span>THE EVOLUTION OF PERFORMANCE</span><span class="marquee__dot">•</span>
+        <span>PRECISION ENGINEERED</span><span class="marquee__dot">•</span>
+        <span>HANDMADE IN GERMANY</span><span class="marquee__dot">•</span>
+        <span>ALPHA RIB TECHNOLOGY</span><span class="marquee__dot">•</span>
+        <span>MEILENSTEIN ART</span><span class="marquee__dot">•</span>
       </div>
-      <div class="marquee-content" aria-hidden="true">
-        <span>THE EVOLUTION OF PERFORMANCE</span>
-        <span class="marquee-dot">•</span>
-        <span>PRECISION ENGINEERED</span>
-        <span class="marquee-dot">•</span>
-        <span>HANDMADE IN GERMANY</span>
-        <span class="marquee-dot">•</span>
-        <span>ALPHA RIB TECHNOLOGY</span>
-        <span class="marquee-dot">•</span>
-        <span>MEILENSTEIN ART</span>
-        <span class="marquee-dot">•</span>
+      <div class="marquee__content" aria-hidden="true">
+        <span>THE EVOLUTION OF PERFORMANCE</span><span class="marquee__dot">•</span>
+        <span>PRECISION ENGINEERED</span><span class="marquee__dot">•</span>
+        <span>HANDMADE IN GERMANY</span><span class="marquee__dot">•</span>
+        <span>ALPHA RIB TECHNOLOGY</span><span class="marquee__dot">•</span>
+        <span>MEILENSTEIN ART</span><span class="marquee__dot">•</span>
       </div>
     </div>
   </section>
 
-  <!-- ============ PRODUCTS GRID ============ -->
+  <!-- ============ PRODUCTS ============ -->
   <section id="products" class="section section--dark">
-    <div class="crosshair crosshair--tl">+</div>
-    <div class="crosshair crosshair--tr">+</div>
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-label">WHEELS</span>
-        <h2 class="section-title">OUR COLLECTION</h2>
-      </div>
-      <div class="products-grid">
+    <div class="container">
+      <span class="section__label" data-reveal>WHEELS</span>
+      <h2 class="section__title" data-reveal>OUR COLLECTION</h2>
+      <div class="products">
         <div class="product-card" data-reveal>
-          <div class="product-card-img">
-            <img src="/images/hero-wheel.png" alt="MEILENSTEIN ART" />
-          </div>
-          <div class="product-card-info">
+          <div class="product-card__img"><img src="/images/hero-wheel.png" alt="MEILENSTEIN ART" /></div>
+          <div class="product-card__info">
             <h3>MEILENSTEIN ART</h3>
             <p>All-round road</p>
           </div>
         </div>
         <div class="product-card" data-reveal>
-          <div class="product-card-img">
-            <img src="/images/wheel.png" alt="OBERMAYER EVO" />
-          </div>
-          <div class="product-card-info">
+          <div class="product-card__img"><img src="/images/wheel.png" alt="OBERMAYER EVO" /></div>
+          <div class="product-card__info">
             <h3>OBERMAYER EVO</h3>
             <p>Climbing specialist</p>
           </div>
         </div>
         <div class="product-card" data-reveal>
-          <div class="product-card-img">
-            <img src="/images/hero-wheel.png" alt="FERNWEG EVO PRO" />
-          </div>
-          <div class="product-card-info">
+          <div class="product-card__img"><img src="/images/hero-wheel.png" alt="FERNWEG EVO PRO" /></div>
+          <div class="product-card__info">
             <h3>FERNWEG EVO PRO</h3>
             <p>Aero performance</p>
           </div>
         </div>
         <div class="product-card" data-reveal>
-          <div class="product-card-img">
-            <img src="/images/wheel.png" alt="PFADFINDER EVO" />
-          </div>
-          <div class="product-card-info">
+          <div class="product-card__img"><img src="/images/wheel.png" alt="PFADFINDER EVO" /></div>
+          <div class="product-card__info">
             <h3>PFADFINDER EVO</h3>
             <p>Gravel & adventure</p>
           </div>
@@ -234,101 +218,77 @@
     </div>
   </section>
 
-  <!-- ============ SOCIAL FEED ============ -->
+  <!-- ============ SOCIAL ============ -->
   <section id="social" class="section section--dark">
-    <div class="section-container">
-      <div class="section-header">
-        <h2 class="section-title">#rideINTERNITY</h2>
-      </div>
+    <div class="container">
+      <h2 class="section__title" data-reveal>#rideINTERNITY</h2>
       <div class="social-grid">
-        <a href="#" class="social-card" data-reveal>
-          <img src="/images/cycling1.png" alt="Cycling action" />
-          <div class="social-overlay">
+        <a href="#" class="social-card" data-reveal><img src="/images/cycling1.png" alt="" />
+          <div class="social-card__overlay">
             <p>Performance elevated. Every ride is a statement.</p>
           </div>
         </a>
-        <a href="#" class="social-card" data-reveal>
-          <img src="/images/wheel.png" alt="Carbon wheel detail" />
-          <div class="social-overlay">
+        <a href="#" class="social-card" data-reveal><img src="/images/wheel.png" alt="" />
+          <div class="social-card__overlay">
             <p>Precision-built for those who demand excellence.</p>
           </div>
         </a>
-        <a href="#" class="social-card" data-reveal>
-          <img src="/images/cycling2.png" alt="Mountain pass ride" />
-          <div class="social-overlay">
-            <p>The more you ride, the stronger you get, and the further you can go.</p>
+        <a href="#" class="social-card" data-reveal><img src="/images/cycling2.png" alt="" />
+          <div class="social-card__overlay">
+            <p>The more you ride, the stronger you get.</p>
           </div>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ============ CTA / ABOUT ============ -->
-  <section id="about-cta" class="section section--dark">
-    <div class="crosshair crosshair--tl">+</div>
-    <div class="crosshair crosshair--tr">+</div>
-    <div class="crosshair crosshair--bl">+</div>
-    <div class="crosshair crosshair--br">+</div>
-    <div class="cta-content">
-      <h2 class="cta-title" data-reveal>At INTERNITY, we craft more than wheels.<br />We shape icons of performance.
-      </h2>
-      <a href="#" class="btn btn--outline" data-reveal>About Us</a>
-    </div>
+  <!-- ============ CTA ============ -->
+  <section id="about-cta" class="section section--dark section--cta">
+    <div class="cross cross--tl">+</div>
+    <div class="cross cross--tr">+</div>
+    <div class="cross cross--bl">+</div>
+    <div class="cross cross--br">+</div>
+    <h2 class="cta__title" data-reveal>At Internity, we craft more than wheels.<br />We shape icons of performance.</h2>
+    <a href="#" class="btn btn--outline-light" data-reveal>About Us</a>
   </section>
 
   <!-- ============ NEWSLETTER ============ -->
-  <section id="newsletter" class="section section--dark newsletter-section">
-    <div class="section-container">
-      <h2 class="newsletter-title" data-reveal>Subscribe to our newsletter</h2>
-      <p class="newsletter-subtitle" data-reveal>Stay informed with the latest from INTERNITY.</p>
-      <form class="newsletter-form" data-reveal>
+  <section id="newsletter" class="section section--dark section--newsletter">
+    <div class="container">
+      <h2 class="newsletter__title" data-reveal>Subscribe to our newsletter</h2>
+      <p class="newsletter__sub" data-reveal>Stay informed with the latest from Internity.</p>
+      <form class="newsletter__form" data-reveal>
         <input type="email" placeholder="Your email*" required />
         <button type="submit" class="btn btn--filled">Subscribe</button>
       </form>
-      <p class="newsletter-privacy" data-reveal>
-        I agree to the collection and processing of my personal data as described in the <a href="#">Privacy Policy</a>.
-      </p>
+      <p class="newsletter__privacy" data-reveal>I agree to the collection and processing of my personal data as
+        described in the <a href="#">Privacy Policy</a>.</p>
     </div>
   </section>
 
   <!-- ============ FOOTER ============ -->
   <footer id="footer">
-    <div class="footer-inner">
-      <div class="footer-col footer-brand">
-        <span class="footer-logo">INTERNITY</span>
-        <p class="footer-tagline">Performance elevated.</p>
+    <div class="footer__inner">
+      <div class="footer__col footer__brand"><span class="footer__logo"><em>Internity</em></span>
+        <p>Performance elevated.</p>
       </div>
-      <div class="footer-col">
-        <h4>Wheels</h4>
-        <a href="#">MEILENSTEIN ART</a>
-        <a href="#">OBERMAYER EVO</a>
-        <a href="#">FERNWEG EVO PRO</a>
-        <a href="#">PFADFINDER EVO</a>
+      <div class="footer__col">
+        <h4>Wheels</h4><a href="#">MEILENSTEIN ART</a><a href="#">OBERMAYER EVO</a><a href="#">FERNWEG EVO PRO</a><a
+          href="#">PFADFINDER EVO</a>
       </div>
-      <div class="footer-col">
-        <h4>About Us</h4>
-        <a href="#">About Us</a>
-        <a href="#">Technology</a>
-        <a href="#">Athletes</a>
-        <a href="#">Partners</a>
+      <div class="footer__col">
+        <h4>About Us</h4><a href="#">About Us</a><a href="#">Technology</a><a href="#">Athletes</a><a
+          href="#">Partners</a>
       </div>
-      <div class="footer-col">
-        <h4>Additional</h4>
-        <a href="#">Dealers</a>
-        <a href="#">Service</a>
-        <a href="#">Jobs</a>
+      <div class="footer__col">
+        <h4>Additional</h4><a href="#">Dealers</a><a href="#">Service</a><a href="#">Jobs</a>
       </div>
-      <div class="footer-col">
-        <h4>Documents</h4>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms & Conditions</a>
-        <a href="#">Imprint</a>
-        <a href="#">Cookie settings</a>
+      <div class="footer__col">
+        <h4>Documents</h4><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a><a href="#">Imprint</a><a
+          href="#">Cookie settings</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2025 INTERNITY. All rights reserved.</span>
-    </div>
+    <div class="footer__bottom"><span>&copy; 2025 Internity. All rights reserved.</span></div>
   </footer>
 
   <script type="module" src="/src/main.js"></script>

@@ -1,6 +1,6 @@
 /* ============================
    INTERNITY — Main JS
-   Scroll-Jacking Showcase Engine
+   GSAP Pin + Scrubbed Timeline
    ============================ */
 
 import Lenis from 'lenis';
@@ -11,9 +11,9 @@ import './style.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ============================
-// LOADER
-// ============================
+/* ============================
+   LOADER
+   ============================ */
 function initLoader() {
   const loader = document.getElementById('loader');
   const fill = document.getElementById('loaderFill');
@@ -38,9 +38,9 @@ function initLoader() {
   }, 120);
 }
 
-// ============================
-// LENIS SMOOTH SCROLL
-// ============================
+/* ============================
+   LENIS SMOOTH SCROLL
+   ============================ */
 function initLenis() {
   const lenis = new Lenis({
     duration: 1.2,
@@ -48,209 +48,172 @@ function initLenis() {
     smoothWheel: true,
     touchMultiplier: 2,
   });
-
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
-
   return lenis;
 }
 
-// ============================
-// SHOWCASE SCROLL-JACKING
-// ============================
+/* ============================
+   SHOWCASE — THE CORE ANIMATION
+   Uses GSAP ScrollTrigger pin + scrubbed timeline.
+   The #showcase section (100vh) is pinned for 500vh of scroll.
+   A GSAP timeline animates every transition:
+      slide opacity, wheel position/scale, bg color, sidebar, ring.
+   ============================ */
 function initShowcase() {
   const showcase = document.getElementById('showcase');
-  const bg = document.getElementById('showcaseBg');
-  const wheel = document.getElementById('showcaseWheel');
-  const sidebar = document.getElementById('showcaseSidebar');
-  const panels = document.querySelectorAll('.showcase-panel');
-  const sidebarItems = document.querySelectorAll('.sidebar-item');
-  const crosshairs = showcase.querySelectorAll('.crosshair');
-  const wheelCrosshairs = showcase.querySelectorAll('.wheel-crosshair');
-  const wheelRing = showcase.querySelector('.wheel-ring');
-  const sidebarProgress = document.getElementById('sidebarProgress');
-  const progressBar = document.querySelector('.sidebar-progress');
+  const bgLight = document.getElementById('bgLight');
+  const wheel = document.getElementById('wheel');
+  const ring = document.getElementById('ring');
+  const scrollCue = document.getElementById('scrollCue');
   const nav = document.getElementById('mainNav');
 
-  const totalPanels = panels.length; // 5 panels (0-4)
-  let currentPanel = -1;
-
-  // Helper to interpolate colors
-  function lerpColor(a, b, t) {
-    const ar = parseInt(a.slice(1, 3), 16);
-    const ag = parseInt(a.slice(3, 5), 16);
-    const ab = parseInt(a.slice(5, 7), 16);
-    const br = parseInt(b.slice(1, 3), 16);
-    const bg2 = parseInt(b.slice(3, 5), 16);
-    const bb = parseInt(b.slice(5, 7), 16);
-    const rr = Math.round(ar + (br - ar) * t);
-    const gg = Math.round(ag + (bg2 - ag) * t);
-    const bbb = Math.round(ab + (bb - ab) * t);
-    return `rgb(${rr}, ${gg}, ${bbb})`;
-  }
-
-  // Panel: which panels are dark vs light
-  // Panel 0: dark (hero)
-  // Panel 1-4: light background
-  const panelBgColors = ['#000000', '#e8e5e0', '#e8e5e0', '#e8e5e0', '#e8e5e0'];
-  const panelIsDark = [true, false, false, false, false];
-
-  // Wheel positions for each panel:
-  // Panel 0: centered, large, behind text
-  // Panel 1: left side, large, behind content on right
-  // Panel 2: centered, medium, top portion visible
-  // Panel 3: left side again
-  // Panel 4: left side, slightly down
-  const wheelStates = [
-    { x: '50%', y: '55%', scale: 0.9, opacity: 0.45 },   // Panel 0: centered
-    { x: '30%', y: '50%', scale: 1.1, opacity: 1 },      // Panel 1: left, big
-    { x: '50%', y: '65%', scale: 0.85, opacity: 0.9 },    // Panel 2: centered, top
-    { x: '30%', y: '50%', scale: 1.05, opacity: 1 },      // Panel 3: left
-    { x: '35%', y: '50%', scale: 1.0, opacity: 0.9 },     // Panel 4: left
+  const slides = [
+    document.getElementById('slide0'),
+    document.getElementById('slide1'),
+    document.getElementById('slide2'),
+    document.getElementById('slide3'),
+    document.getElementById('slide4'),
   ];
 
-  function updatePanel(index) {
-    if (index === currentPanel) return;
-    currentPanel = index;
+  const sidebarItems = showcase.querySelectorAll('.sidebar__item');
+  const lineFill = showcase.querySelector('.sidebar__line-fill');
 
-    // Update background color
-    bg.style.background = panelBgColors[index];
+  // ---- Build the master timeline ----
+  // Total: 5 slides. Each "transition" occupies an equal portion.
+  // Between slides: crossfade text, shift wheel, change bg.
 
-    // Update panel visibility with animation
-    panels.forEach((panel, i) => {
-      if (i === index) {
-        panel.classList.add('active');
-        // Animate panel content in
-        const children = panel.querySelectorAll('.panel-overline, .panel-hero-title, .panel-title, .panel-title-large, .panel-text, .panel-text-center, .btn');
-        gsap.fromTo(children,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: 'power3.out', overwrite: true }
-        );
-      } else {
-        panel.classList.remove('active');
-      }
-    });
+  const tl = gsap.timeline();
 
-    // Update light/dark classes
-    const isLight = !panelIsDark[index];
+  // ===== SLIDE 0 → SLIDE 1 =====
+  // Fade out welcome text
+  tl.to(slides[0], { opacity: 0, duration: 0.3, ease: 'none' }, 0);
+  // Fade out scroll cue
+  tl.to(scrollCue, { opacity: 0, duration: 0.15, ease: 'none' }, 0);
+  // Transition bg from dark to light
+  tl.to(bgLight, { opacity: 1, duration: 0.4, ease: 'power2.inOut' }, 0);
+  // Move wheel to the left, make it bigger
+  tl.to(wheel, {
+    left: '30%', top: '50%', scale: 1.2, opacity: 1,
+    duration: 0.4, ease: 'power2.inOut',
+  }, 0);
+  // Show ring
+  tl.to(ring, { opacity: 1, duration: 0.3, ease: 'none' }, 0.1);
+  // Fade in slide 1
+  tl.to(slides[1], { opacity: 1, duration: 0.3, ease: 'none' }, 0.15);
+  // Apply light theme
+  tl.call(() => {
+    showcase.classList.add('is-light');
+    nav.classList.add('is-light');
+    slides[1].classList.add('is-light');
+    updateSidebar(0);
+  }, null, 0.2);
 
-    panels.forEach(p => p.classList.toggle('is-light', isLight));
-    crosshairs.forEach(c => c.classList.toggle('is-light', isLight));
-    wheelCrosshairs.forEach(c => c.classList.toggle('is-light', isLight));
-    if (wheelRing) wheelRing.classList.toggle('is-light', isLight);
-    sidebarItems.forEach(s => s.classList.toggle('is-light', isLight));
-    if (progressBar) progressBar.classList.toggle('is-light', isLight);
+  // ===== HOLD SLIDE 1 =====
+  tl.to({}, { duration: 0.4 }); // pause
 
-    // Nav color
-    if (isLight) {
-      nav.classList.add('nav--light');
-    } else {
-      nav.classList.remove('nav--light');
-    }
+  // ===== SLIDE 1 → SLIDE 2 =====
+  const t2Start = tl.duration();
+  tl.to(slides[1], { opacity: 0, duration: 0.3, ease: 'none' }, t2Start);
+  tl.to(wheel, {
+    left: '50%', top: '55%', scale: 0.9,
+    duration: 0.4, ease: 'power2.inOut',
+  }, t2Start);
+  tl.to(slides[2], { opacity: 1, duration: 0.3, ease: 'none' }, t2Start + 0.15);
+  tl.call(() => {
+    slides[2].classList.add('is-light');
+    updateSidebar(1);
+  }, null, t2Start + 0.2);
 
-    // Update sidebar active
-    const sidebarIndex = Math.max(0, Math.min(index, 3));
-    sidebarItems.forEach((item, i) => {
-      item.classList.toggle('active', i === sidebarIndex);
-    });
+  // ===== HOLD SLIDE 2 =====
+  tl.to({}, { duration: 0.4 });
 
-    // Animate wheel position
-    const ws = wheelStates[index];
-    gsap.to(wheel, {
-      left: ws.x,
-      top: ws.y,
-      scale: ws.scale,
-      opacity: ws.opacity,
-      duration: 1.2,
-      ease: 'power2.inOut',
-      overwrite: true,
-    });
-  }
+  // ===== SLIDE 2 → SLIDE 3 =====
+  const t3Start = tl.duration();
+  tl.to(slides[2], { opacity: 0, duration: 0.3, ease: 'none' }, t3Start);
+  tl.to(wheel, {
+    left: '30%', top: '50%', scale: 1.15,
+    duration: 0.4, ease: 'power2.inOut',
+  }, t3Start);
+  tl.to(slides[3], { opacity: 1, duration: 0.3, ease: 'none' }, t3Start + 0.15);
+  tl.call(() => {
+    slides[3].classList.add('is-light');
+    updateSidebar(2);
+  }, null, t3Start + 0.2);
 
-  // Show initial elements
-  gsap.to(wheel, { opacity: wheelStates[0].opacity, duration: 1, delay: 0.3 });
-  gsap.to(sidebar, { opacity: 1, duration: 0.8, delay: 0.5 });
+  // ===== HOLD SLIDE 3 =====
+  tl.to({}, { duration: 0.4 });
 
-  // Set first panel
-  updatePanel(0);
+  // ===== SLIDE 3 → SLIDE 4 =====
+  const t4Start = tl.duration();
+  tl.to(slides[3], { opacity: 0, duration: 0.3, ease: 'none' }, t4Start);
+  // Transition bg back to dark for the last slide
+  tl.to(bgLight, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, t4Start);
+  tl.to(wheel, {
+    left: '35%', top: '50%', scale: 1.0,
+    duration: 0.4, ease: 'power2.inOut',
+  }, t4Start);
+  // Hide ring
+  tl.to(ring, { opacity: 0, duration: 0.3, ease: 'none' }, t4Start);
+  tl.to(slides[4], { opacity: 1, duration: 0.3, ease: 'none' }, t4Start + 0.15);
+  tl.call(() => {
+    showcase.classList.remove('is-light');
+    nav.classList.remove('is-light');
+    slides[4].classList.remove('is-light');
+    updateSidebar(3);
+  }, null, t4Start + 0.2);
 
-  // Main ScrollTrigger for the entire showcase
+  // ===== HOLD SLIDE 4 =====
+  tl.to({}, { duration: 0.4 });
+
+  // ---- ATTACH ScrollTrigger to pin + scrub ----
   ScrollTrigger.create({
     trigger: showcase,
     start: 'top top',
-    end: 'bottom bottom',
-    scrub: 0.1,
+    end: '+=500%',   // 5 × viewport height of scroll distance
+    pin: true,       // GSAP pins the section
+    scrub: 0.8,      // Smooth scrub
+    animation: tl,
     onUpdate: (self) => {
-      const progress = self.progress;
-      const panelIndex = Math.min(
-        Math.floor(progress * totalPanels),
-        totalPanels - 1
-      );
-      updatePanel(panelIndex);
-
-      // Update sidebar progress
-      const panelProgress = (progress * totalPanels) % 1;
-      if (sidebarProgress) {
-        sidebarProgress.style.height = (panelProgress * 100) + '%';
-      }
-
-      // Smooth background color transition between panels
-      const exactPanel = progress * totalPanels;
-      const fromPanel = Math.floor(exactPanel);
-      const toPanel = Math.min(fromPanel + 1, totalPanels - 1);
-      const t = exactPanel - fromPanel;
-      const color = lerpColor(panelBgColors[fromPanel], panelBgColors[toPanel], t);
-      bg.style.background = color;
-
-      // Smooth wheel position interpolation
-      if (fromPanel < totalPanels && toPanel < totalPanels) {
-        const fromWS = wheelStates[fromPanel];
-        const toWS = wheelStates[toPanel];
-        // Interpolate x, y percent values
-        const fromX = parseFloat(fromWS.x);
-        const toX = parseFloat(toWS.x);
-        const fromY = parseFloat(fromWS.y);
-        const toY = parseFloat(toWS.y);
-        const fromScale = fromWS.scale;
-        const toScale = toWS.scale;
-        const fromOpacity = fromWS.opacity;
-        const toOpacity = toWS.opacity;
-
-        const interpX = fromX + (toX - fromX) * t;
-        const interpY = fromY + (toY - fromY) * t;
-        const interpScale = fromScale + (toScale - fromScale) * t;
-        const interpOpacity = fromOpacity + (toOpacity - fromOpacity) * t;
-
-        gsap.set(wheel, {
-          left: interpX + '%',
-          top: interpY + '%',
-          scale: interpScale,
-          opacity: interpOpacity,
-        });
+      // Progress-based sidebar fill
+      if (lineFill) {
+        const totalSlides = 4;
+        const slideProgress = self.progress * totalSlides;
+        const currentSlide = Math.floor(slideProgress);
+        const fill = (slideProgress - currentSlide);
+        lineFill.style.height = (fill * 100) + '%';
       }
     },
     onLeave: () => {
-      // Hide fixed elements when leaving showcase
-      gsap.to(wheel, { opacity: 0, duration: 0.5 });
-      gsap.to(sidebar, { opacity: 0, duration: 0.5 });
-      panels.forEach(p => p.classList.remove('active'));
-      nav.classList.remove('nav--light');
+      // Ensure light classes removed when leaving
+      showcase.classList.remove('is-light');
+      nav.classList.remove('is-light');
     },
     onEnterBack: () => {
-      // Show fixed elements when coming back
-      gsap.to(sidebar, { opacity: 1, duration: 0.5 });
-      updatePanel(totalPanels - 1);
-    },
-    onLeaveBack: () => {
-      // Coming back to top
-    },
+      // Re-apply correct state when entering back
+    }
   });
+
+  // ---- Initial state: show slide 0 and fade in wheel ----
+  gsap.set(wheel, { left: '50%', top: '50%', scale: 0.85, opacity: 0 });
+  gsap.to(wheel, { opacity: 0.45, duration: 1.2, delay: 0.3, ease: 'power2.out' });
+
+  // ---- Sidebar helper ----
+  function updateSidebar(activeIndex) {
+    sidebarItems.forEach((item, i) => {
+      const isActive = i === activeIndex;
+      item.classList.toggle('sidebar__item--active', isActive);
+    });
+  }
+
+  // Initial sidebar
+  updateSidebar(0);
 }
 
-// ============================
-// SCROLL REVEAL
-// ============================
+/* ============================
+   SCROLL REVEAL
+   ============================ */
 function initScrollReveal() {
   document.querySelectorAll('[data-reveal]').forEach((el) => {
     ScrollTrigger.create({
@@ -262,71 +225,60 @@ function initScrollReveal() {
   });
 }
 
-// ============================
-// PRODUCT CARDS
-// ============================
+/* ============================
+   PRODUCT CARDS
+   ============================ */
 function initProductCards() {
-  gsap.from('.product-card', {
-    opacity: 0,
-    y: 60,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.products-grid',
-      start: 'top 80%',
-    },
+  const cards = document.querySelectorAll('.product-card');
+  if (!cards.length) return;
+  gsap.from(cards, {
+    opacity: 0, y: 60, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+    scrollTrigger: { trigger: '.products', start: 'top 80%' },
   });
 }
 
-// ============================
-// SOCIAL CARDS
-// ============================
+/* ============================
+   SOCIAL CARDS
+   ============================ */
 function initSocialCards() {
-  gsap.from('.social-card', {
-    opacity: 0,
-    y: 40,
-    scale: 0.95,
-    duration: 0.8,
-    stagger: 0.12,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.social-grid',
-      start: 'top 80%',
-    },
+  const cards = document.querySelectorAll('.social-card');
+  if (!cards.length) return;
+  gsap.from(cards, {
+    opacity: 0, y: 40, scale: 0.95, duration: 0.8, stagger: 0.12, ease: 'power3.out',
+    scrollTrigger: { trigger: '.social-grid', start: 'top 80%' },
   });
 }
 
-// ============================
-// CTA
-// ============================
+/* ============================
+   CTA
+   ============================ */
 function initCTA() {
-  const ctaTitle = document.querySelector('.cta-title');
-  if (!ctaTitle) return;
-  gsap.from(ctaTitle, {
+  const title = document.querySelector('.cta__title');
+  if (!title) return;
+  gsap.from(title, {
     opacity: 0, y: 50, duration: 1.2, ease: 'power3.out',
     scrollTrigger: { trigger: '#about-cta', start: 'top 70%' },
   });
 }
 
-// ============================
-// FOOTER
-// ============================
+/* ============================
+   FOOTER
+   ============================ */
 function initFooter() {
-  gsap.from('.footer-col', {
+  gsap.from('.footer__col', {
     opacity: 0, y: 30, duration: 0.7, stagger: 0.1, ease: 'power3.out',
     scrollTrigger: { trigger: '#footer', start: 'top 85%' },
   });
 }
 
-// ============================
-// MARQUEE SPEED
-// ============================
+/* ============================
+   MARQUEE — speed reacts to scroll
+   ============================ */
 function initMarquee() {
-  const track = document.querySelector('.marquee-track');
+  const track = document.querySelector('.marquee__track');
   if (!track) return;
   ScrollTrigger.create({
-    trigger: '.section--marquee',
+    trigger: '.marquee',
     start: 'top bottom',
     end: 'bottom top',
     onUpdate: (self) => {
@@ -336,9 +288,9 @@ function initMarquee() {
   });
 }
 
-// ============================
-// MOBILE MENU
-// ============================
+/* ============================
+   MOBILE MENU
+   ============================ */
 function initMobileMenu() {
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -348,7 +300,6 @@ function initMobileMenu() {
     mobileMenu.classList.toggle('open');
     menuBtn.classList.toggle('active');
   });
-
   mobileMenu.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
@@ -357,9 +308,9 @@ function initMobileMenu() {
   });
 }
 
-// ============================
-// INIT ALL
-// ============================
+/* ============================
+   INIT ALL
+   ============================ */
 function initAll() {
   initLenis();
   initShowcase();
